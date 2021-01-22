@@ -6,7 +6,7 @@ export default ({ data, location }) => <Page data={data} location={location} />;
 
 export const pageQuery = graphql`
     query Page($path: String!) {
-        googleDocs(fields: { slug: { eq: $path } }) {
+        googleDocs(path: { eq: $path }) {
             name
             document {
                 documentId
