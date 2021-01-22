@@ -12,15 +12,22 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "token": "gatsby-source-google-docs-token"
   },
   "license": "0BSD",
   "dependencies": {
     "babel-plugin-styled-components": "^1.12.0",
     "gatsby": "^2.26.1",
     "gatsby-plugin-react-helmet": "^3.6.0",
+    "gatsby-plugin-sharp": "^2.10.1",
     "gatsby-plugin-sitemap": "^2.8.0",
     "gatsby-plugin-styled-components": "^3.6.0",
+    "gatsby-remark-embed-video": "^3.0.10",
+    "gatsby-remark-images": "^3.7.1",
+    "gatsby-source-google-docs": "^2.0.0-beta.37",
+    "gatsby-transformer-remark": "^2.12.0",
+    "query-string": "^6.13.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
