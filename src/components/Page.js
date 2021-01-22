@@ -51,6 +51,9 @@ const BasicStyle = createGlobalStyle`
         text-shadow: 0 0 0px rgba(0, 0, 255, 0.0) !important;
     }
 
+    span.gatsby-resp-image-wrapper {
+        margin: 1.5rem 0 !important;
+    }
     /*
     span + span {
         margin-left: 0.25rem;
