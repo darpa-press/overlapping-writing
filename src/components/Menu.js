@@ -15,17 +15,13 @@ const MenuItems = styled.div`
     > * {
         display: block;
     }
-
-    [aria-current="page"] {
-        text-shadow: 0 0 7px rgba(0, 0, 255, 0.5);
-    }
 `;
 
 const MenuHeader = styled.div`
     margin-bottom: 4rem;
 `;
 
-export default () => {
+export default ({ location }) => {
     const {
         allGoogleDocs: { edges },
     } = useStaticQuery(graphql`
@@ -43,7 +39,12 @@ export default () => {
     return (
         <Menu>
             <MenuHeader>
-                <Link to="/">Overlapping</Link>
+                <Link
+                    to="/"
+                    className={location.pathname === "/home" ? "active" : ""}
+                >
+                    Overlapping
+                </Link>
             </MenuHeader>
             <MenuItems>
                 {edges.map(({ node: { path, name } }) =>

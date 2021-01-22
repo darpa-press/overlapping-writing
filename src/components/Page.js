@@ -1,8 +1,11 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import styled, { createGlobalStyle } from "styled-components";
 import queryString from "query-string";
 import { Link } from "gatsby";
 import Menu from "./Menu";
+
+import "../fonts/fonts.css";
 
 const BasicStyle = createGlobalStyle`
     html, body {
@@ -17,18 +20,35 @@ const BasicStyle = createGlobalStyle`
     html {
         font-size: 200%;
         line-height: 1.2;
-        font-family: "Folio";
+        font-family: "folio";
     }
     h1 {
-        font-weight: 300;
+        font-weight: 400;
         margin: 0 0 7rem 0;
-        font-family: "Century Supra T3";
+        font-family: "century_supra";
+    }
+
+    h2,h3,h4,h5,h6 {
+        font-weight: 400;
+        font-family: "century_supra";
+        letter-spacing: 0.5px;
+        margin: 2.5rem 0 1rem 0;
     }
 
     a { 
         color: blue;
         text-underline-position: under;
         text-decoration: none;
+        text-shadow: 0 0 0px rgba(0, 0, 255, 0.0);
+        transition: 0.2s all ease;
+    }
+
+    a.active, a[aria-current="page"] {
+        text-shadow: 0 0 7px rgba(0, 0, 255, 0.4);
+    }
+    
+    a.inactive {
+        text-shadow: 0 0 0px rgba(0, 0, 255, 0.0) !important;
     }
 
     /*
@@ -110,17 +130,46 @@ export default ({
 }) => {
     const { search, pathname } = location || { search: false, pathname: "/" };
     const searchParsed = queryString.parse(search);
-    console.log("hello");
+
+    const pageTitleA = "Overlapping writing";
+    const pageTitleB = title;
+    let pageTitle = "";
+    for (let i = 0; i <= pageTitleA.length; i += 2) {
+        pageTitle += pageTitleA.substr(i, 2) + pageTitleB.substr(i / 2, 1);
+    }
+
     return (
         <>
             <BasicStyle />
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>{pageTitle}</title>
+            </Helmet>
             <Page>
-                <Menu />
+                <Menu location={location} />
                 <Content>
                     <PageHead>
                         <HeadLinks>
-                            <Link to={pathname}>Article</Link>{" "}
-                            <Link to={`${pathname}?source=1`}>Source</Link>
+                            <Link
+                                className={
+                                    searchParsed.source !== "1"
+                                        ? "active"
+                                        : "inactive"
+                                }
+                                to={pathname}
+                            >
+                                Article
+                            </Link>{" "}
+                            <Link
+                                className={
+                                    searchParsed.source === "1"
+                                        ? "active"
+                                        : "inactive"
+                                }
+                                to={`${pathname}?source=1`}
+                            >
+                                Source
+                            </Link>
                         </HeadLinks>
                         <div>
                             <Link to={"/about"}>About</Link>
