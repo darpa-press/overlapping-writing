@@ -1,78 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 import queryString from "query-string";
 import { Link } from "gatsby";
 import Menu from "./Menu";
 
-import "../fonts/fonts.css";
-
-const BasicStyle = createGlobalStyle`
-    html, body {
-        padding: 0;
-        margin:0;
-        background: #fcfcfc;
-    }
-
-    * { 
-        box-sizing: border-box;
-    }
-    html {
-        font-size: 200%;
-        line-height: 1.2;
-        font-family: "folio";
-    }
-    h1 {
-        font-weight: 400;
-        margin: 0 0 7rem 0;
-        font-family: "century_supra";
-    }
-
-    h2,h3,h4,h5,h6 {
-        font-weight: 400;
-        font-family: "century_supra";
-        letter-spacing: 0.5px;
-        margin: 2.5rem 0 1rem 0;
-    }
-
-    a { 
-        color: blue;
-        text-underline-position: under;
-        text-decoration: none;
-        text-shadow: 0 0 0px rgba(0, 0, 255, 0.0);
-        transition: 0.2s all ease;
-    }
-
-    a.active, a[aria-current="page"] {
-        text-shadow: 0 0 7px rgba(0, 0, 255, 0.4);
-    }
-    
-    a.inactive {
-        text-shadow: 0 0 0px rgba(0, 0, 255, 0.0) !important;
-    }
-
-    span.gatsby-resp-image-wrapper {
-        margin: 1.5rem 0 !important;
-    }
-    /*
-    span + span {
-        margin-left: 0.25rem;
-    } */
-
-    .embedVideo-container {
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
-        height: 0;
-        margin: 2rem 0;
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    }
-`;
+import BasicStyle from "./BasicStyle";
 
 const Page = styled.div`
     display: flex;
@@ -81,6 +14,10 @@ const Page = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 `;
 
 const HeadLinks = styled.div`
@@ -175,7 +112,7 @@ export default ({
                             </Link>
                         </HeadLinks>
                         <div>
-                            <Link to={"/about"}>About</Link>
+                            <Link to={"/about"}>Writing</Link>
                         </div>
                     </PageHead>
                     {searchParsed.source === "1" ? (
