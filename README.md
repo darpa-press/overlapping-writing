@@ -1,20 +1,2 @@
-Overlapping writing
-gOverlapping writin
-ngOverlapping writi
-ingOverlapping writ
-tingOverlapping wri
-itingOverlapping wr
-ritingOverlapping w
-writingOverlapping 
- writingOverlapping
-g writingOverlappin
-ng writingOverlappi
-ing writingOverlapp
-ping writingOverlap
-pping writingOverla
-apping writingOverl
-lapping writingOver
-rlapping writingOve
-erlapping writingOv
-verlapping writingO
-Overlapping writing
+O🗗v🗗e🗗r🗗l🗗a🗗p🗗p🗗i🗗n🗗g  
+🗗W🗗r🗗i🗗t🗗i🗗n🗗g🗗

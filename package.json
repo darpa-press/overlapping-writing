@@ -1,36 +1,33 @@
 {
-  "name": "nfl-test",
-  "version": "1.0.0",
-  "private": true,
-  "description": "My Gatsby site",
-  "author": "Rowan McNaught",
-  "keywords": [
-    "gatsby"
-  ],
-  "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "token": "gatsby-source-google-docs-token"
-  },
-  "license": "0BSD",
-  "dependencies": {
-    "babel-plugin-styled-components": "^1.12.0",
-    "gatsby": "^2.26.1",
-    "gatsby-plugin-react-helmet": "^3.6.0",
-    "gatsby-plugin-sharp": "^2.10.1",
-    "gatsby-plugin-sitemap": "^2.8.0",
-    "gatsby-plugin-styled-components": "^3.6.0",
-    "gatsby-remark-embed-video": "^3.0.10",
-    "gatsby-remark-images": "^3.7.1",
-    "gatsby-source-google-docs": "^2.0.0-beta.44",
-    "gatsby-transformer-remark": "^2.15.0",
-    "query-string": "^6.13.8",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-helmet": "^6.1.0",
-    "styled-components": "^5.2.1"
-  }
+    "name": "overlapping-writing",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Platform for ACCA/nonFiction Lab 2021 publication",
+    "author": "Rowan McNaught",
+    "scripts": {
+        "develop": "gatsby develop",
+        "start": "gatsby develop",
+        "build": "gatsby build",
+        "serve": "gatsby serve",
+        "clean": "gatsby clean",
+        "token": "gatsby-source-google-docs-token"
+    },
+    "license": "0BSD",
+    "dependencies": {
+        "babel-plugin-styled-components": "^1.12.0",
+        "gatsby": "^2.26.1",
+        "gatsby-plugin-react-helmet": "^3.6.0",
+        "gatsby-plugin-sharp": "^2.10.1",
+        "gatsby-plugin-sitemap": "^2.8.0",
+        "gatsby-plugin-styled-components": "^3.6.0",
+        "gatsby-remark-embed-video": "^3.0.10",
+        "gatsby-remark-images": "^3.7.1",
+        "gatsby-source-google-docs": "^2.0.0-beta.44",
+        "gatsby-transformer-remark": "^2.15.0",
+        "query-string": "^6.13.8",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-helmet": "^6.1.0",
+        "styled-components": "^5.2.1"
+    }
 }
