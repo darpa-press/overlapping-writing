@@ -1,4 +1,4 @@
-## Overlapping\nwriting
+## Overlapping writing
 
 To reuse this platform for your own publication, 
 
