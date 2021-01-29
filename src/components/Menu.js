@@ -45,7 +45,11 @@ const MobileActivate = styled.button`
     background: none;
     font-size: 1rem;
     color: blue;
+    display: none;
     padding: 0;
+    @media screen and (max-width: 768px) {
+        display: block;
+    }
 `;
 
 const MenuHeader = styled.div`

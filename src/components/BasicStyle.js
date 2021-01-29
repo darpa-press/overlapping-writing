@@ -25,6 +25,17 @@ const BasicStyle = createGlobalStyle`
         }
     }
 
+    b, strong {
+        font-weight: 500;
+    }
+
+    sup {
+        font-size: 0.4em;
+        vertical-align: inherit;
+        position:relative;
+        top: -0.6em;
+    }
+
     h1 {
         font-weight: 500;
         margin: 0 0 6rem 0;
@@ -36,6 +47,18 @@ const BasicStyle = createGlobalStyle`
         //font-family: "century_supra";
         letter-spacing: 0.5px;
         margin: 4rem 0 1.5rem 0;
+    }
+
+    em, i {
+        font-family: verdigris;
+    }
+
+    pre, code {
+        font-family: inherit;
+        font-style: inherit;
+        font-size: inherit;
+        color: inherit;
+        white-space: pre-wrap;
     }
 
     a { 
