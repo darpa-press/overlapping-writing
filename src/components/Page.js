@@ -36,6 +36,7 @@ const Content = styled.div`
 
 const PageContent = styled.div`
     max-width: 40rem;
+    padding-bottom: 30vh;
 `;
 
 const PageHead = styled.div`

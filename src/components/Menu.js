@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql, Link } from "gatsby";
 
@@ -8,6 +8,16 @@ const Menu = styled.div`
     flex: 0 0 25vw;
     max-width: 320px;
     padding: 1rem;
+
+    @media (max-width: 768px) {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        flex-basis: auto;
+        width: 100%;
+        background: rgba(252, 252, 252, 0.95);
+        max-width: none;
+    }
 `;
 
 const MenuItems = styled.div`
@@ -16,10 +26,33 @@ const MenuItems = styled.div`
     > * {
         display: block;
     }
+
+    @media (max-width: 768px) {
+        display: ${(props) => (props.isMobileMenuOpen ? "flex" : "none")};
+        margin-top: 2rem;
+    }
+`;
+
+const MenuLink = styled(Link)`
+    @media (max-width: 768px) {
+        display: none;
+    }
+`;
+
+const MobileActivate = styled.button`
+    font-family: inherit;
+    border: 0;
+    background: none;
+    font-size: 1rem;
+    color: blue;
+    padding: 0;
 `;
 
 const MenuHeader = styled.div`
     margin-bottom: 4rem;
+    @media (max-width: 768px) {
+        margin-bottom: 0;
+    }
 `;
 
 export default ({ location }) => {
@@ -37,17 +70,24 @@ export default ({ location }) => {
             }
         }
     `);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
     return (
         <Menu>
             <MenuHeader>
-                <Link
+                <MenuLink
                     to="/"
                     className={location.pathname === "/home" ? "active" : ""}
                 >
                     Overlapping
-                </Link>
+                </MenuLink>
+                <MobileActivate
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                    Overlapping
+                </MobileActivate>
             </MenuHeader>
-            <MenuItems>
+            <MenuItems isMobileMenuOpen={isMobileMenuOpen}>
                 {edges
                     .sort((a, b) =>
                         a.node.name < b.node.name

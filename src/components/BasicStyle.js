@@ -20,7 +20,7 @@ const BasicStyle = createGlobalStyle`
             font-size: 120%;
         }
 
-        @media (max-width:1280px) {
+        @media (min-width: 769px) and (max-width:1280px) {
             font-size: 150%;
         }
     }
