@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { sentenceCase } from "sentence-case";
 import styled from "styled-components";
 import { useStaticQuery, graphql, Link } from "gatsby";
 
@@ -39,6 +40,10 @@ const MenuLink = styled(Link)`
     }
 `;
 
+const Sublink = styled(Link)`
+    margin-left: 1rem;
+`;
+
 const MobileActivate = styled.button`
     font-family: inherit;
     border: 0;
@@ -76,6 +81,32 @@ export default ({ location }) => {
     `);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+    let pages = {};
+
+    edges
+        .sort((a, b) =>
+            a.node.name < b.node.name ? -1 : a.node.name > b.node.name ? 1 : 0
+        )
+        .map(({ node }) => {
+            const slugSplit = node.path.split("/");
+
+            if (slugSplit.length > 2) {
+                if (!pages[slugSplit[1]]) {
+                    pages[slugSplit[1]] = {
+                        name: slugSplit[1],
+                        subpage: true,
+                        pages: [node],
+                    };
+                } else {
+                    pages[slugSplit[1]].pages.push(node);
+                }
+            } else {
+                pages[slugSplit[1]] = node;
+            }
+            return true;
+        });
+    const locationTop = location.pathname.split("/")[1];
+
     return (
         <Menu>
             <MenuHeader>
@@ -92,21 +123,39 @@ export default ({ location }) => {
                 </MobileActivate>
             </MenuHeader>
             <MenuItems isMobileMenuOpen={isMobileMenuOpen}>
-                {edges
-                    .sort((a, b) =>
-                        a.node.name < b.node.name
-                            ? -1
-                            : a.node.name > b.node.name
-                            ? 1
-                            : 0
-                    )
-                    .map(({ node: { path, name } }) =>
-                        name !== "Home" && name !== "About" ? (
-                            <Link to={path} key={path}>
-                                {name}
+                {Object.keys(pages).map((id) => {
+                    const page = pages[id];
+                    if (page.name === "Home" || page.name === "About") {
+                        return false;
+                    }
+                    if (!page.subpage) {
+                        return (
+                            <Link to={page.path} key={page.path}>
+                                {page.name}
                             </Link>
-                        ) : null
-                    )}
+                        );
+                    }
+                    if (page.subpage) {
+                        return (
+                            <React.Fragment key={page.name}>
+                                <Link to={page.pages[0].path}>
+                                    {sentenceCase(page.name)}
+                                </Link>
+                                {locationTop === page.name &&
+                                    page.pages.map((subpage) => (
+                                        <Sublink
+                                            to={subpage.path}
+                                            key={subpage.path}
+                                        >
+                                            {subpage.name}
+                                        </Sublink>
+                                    ))}
+                            </React.Fragment>
+                        );
+                    } else {
+                        return false;
+                    }
+                })}
             </MenuItems>
         </Menu>
     );
