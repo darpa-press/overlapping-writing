@@ -9,6 +9,12 @@ const Menu = styled.div`
     flex: 0 0 25vw;
     max-width: 320px;
     padding: 1rem;
+    overflow: auto;
+    z-index: 10;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
     @media (max-width: 768px) {
         position: fixed;
@@ -16,21 +22,31 @@ const Menu = styled.div`
         left: 0;
         flex-basis: auto;
         width: 100%;
+        height: ${(props) => (props.isMobileMenuOpen ? "100%" : "auto")};
         background: rgba(252, 252, 252, 0.95);
+        padding: 0.75rem 1rem;
         max-width: none;
+        overflow: auto;
     }
 `;
 
 const MenuItems = styled.div`
-    display: flex;
-    flex-direction: column;
     > * {
         display: block;
     }
 
+    padding-bottom: 4rem;
+
     @media (max-width: 768px) {
-        display: ${(props) => (props.isMobileMenuOpen ? "flex" : "none")};
+        /* display: flex;
+        flex-direction: column; */
+        display: ${(props) => (props.isMobileMenuOpen ? "block" : "none")};
         margin-top: 2rem;
+        padding-bottom: 1rem;
+
+        > * {
+            margin-bottom: 0.25rem;
+        }
     }
 `;
 
@@ -108,7 +124,7 @@ export default ({ location }) => {
     const locationTop = location.pathname.split("/")[1];
 
     return (
-        <Menu>
+        <Menu isMobileMenuOpen={isMobileMenuOpen}>
             <MenuHeader>
                 <MenuLink
                     to="/"

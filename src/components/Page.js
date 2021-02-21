@@ -127,11 +127,7 @@ export default ({
                     ) : (
                         <PageContent
                             dangerouslySetInnerHTML={{
-                                __html: html
-                                    .replace(`\u000b`, "<br/>")
-                                    .replace(/\n\n/g, "\n")
-                                    .replace(/\n\n/g, "\n")
-                                    .replace(/<\/?code>/g, ""),
+                                __html: html,
                             }}
                         />
                     )}
