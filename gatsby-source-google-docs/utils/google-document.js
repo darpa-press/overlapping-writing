@@ -44,12 +44,15 @@ class GoogleDocument {
             }
         }
 
-        if (!el.textRun || !el.textRun.content || !el.textRun.content.trim()) {
+        if (!el.textRun || !el.textRun.content) {
             return "";
         }
 
         let before = "";
         let text = el.textRun.content.replace(/\n$/, "");
+        if (el.textRun.content === "\n") {
+            text = "&nbsp;";
+        }
         let after = "";
 
         const contentMatch = text.match(/^(\s*)(\S+(?:[ \t\v]*\S+)*)(\s*)$/);

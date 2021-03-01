@@ -35,7 +35,11 @@ const BasicStyle = createGlobalStyle`
         position:relative;
         top: -0.6em;
     }
-
+    
+    p {
+        margin: 0;
+    }
+    
     h1 {
         font-weight: 500;
         margin: 0 0 6rem 0;
