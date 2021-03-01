@@ -22,6 +22,7 @@
         "gatsby-plugin-styled-components": "^3.6.0",
         "gatsby-remark-embed-video": "^3.0.10",
         "gatsby-remark-images": "^3.7.1",
+        "gatsby-source-google-docs": "^2.0.0-beta.44",
         "gatsby-transformer-remark": "^2.15.0",
         "query-string": "^6.13.8",
         "react": "^16.13.1",
