@@ -5,7 +5,7 @@ module.exports = {
         "gatsby-plugin-react-helmet",
         "gatsby-plugin-sitemap",
         {
-            resolve: "gatsby-source-google-docs",
+            resolve: "./gatsby-source-google-docs",
             options: {
                 // https://drive.google.com/drive/folders/FOLDER_ID
                 folder: "1DHdC-U8OikPFyKnXKq7z2YD80OK1MHZ_",
