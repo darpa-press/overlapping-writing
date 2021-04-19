@@ -17,11 +17,11 @@ const BasicStyle = createGlobalStyle`
         font-family: "folio";
 
         @media (max-width:768px) {
-            font-size: 100%;
+            font-size: 120%;
         }
 
         @media (min-width: 769px) and (max-width:1280px) {
-            font-size: 125%;
+            font-size: 130%;
         }
     }
 
