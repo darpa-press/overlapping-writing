@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { sentenceCase } from "sentence-case";
 import styled from "styled-components";
 import { useStaticQuery, graphql, Link } from "gatsby";
 
 const Menu = styled.div`
     display: flex;
     flex-direction: column;
-    flex: 0 0 25vw;
-    max-width: 320px;
+    flex: 0 0 30vw;
+    max-width: 400px;
     padding: 1rem;
     overflow: auto;
     z-index: 10;
+    line-height: 1.1;
 
     ::-webkit-scrollbar {
         display: none;
@@ -56,8 +56,13 @@ const MenuLink = styled(Link)`
     }
 `;
 
+const TopLink = styled(Link)`
+    margin-bottom: 0.333rem;
+`;
+
 const Sublink = styled(Link)`
     margin-left: 1rem;
+    margin-bottom: 0.333rem;
 `;
 
 const MobileActivate = styled.button`
@@ -85,11 +90,12 @@ export default ({ location }) => {
         allGoogleDocs: { edges },
     } = useStaticQuery(graphql`
         query AllDocsQuery {
-            allGoogleDocs {
+            allGoogleDocs(sort: { fields: path, order: ASC }) {
                 edges {
                     node {
                         path
                         name
+                        description
                     }
                 }
             }
@@ -99,29 +105,42 @@ export default ({ location }) => {
 
     let pages = {};
 
-    edges
-        .sort((a, b) =>
-            a.node.name < b.node.name ? -1 : a.node.name > b.node.name ? 1 : 0
-        )
-        .map(({ node }) => {
-            const slugSplit = node.path.split("/");
+    edges.map(({ node }) => {
+        const slugSplit = node.path.split("/");
+        const descriptionSplit =
+            node.description && typeof node.description == "string"
+                ? node.description.split("/")
+                : false;
+        console.log("this", node.description, descriptionSplit);
 
-            if (slugSplit.length > 2) {
-                if (!pages[slugSplit[1]]) {
-                    pages[slugSplit[1]] = {
-                        name: slugSplit[1],
-                        subpage: true,
-                        pages: [node],
-                    };
-                } else {
-                    pages[slugSplit[1]].pages.push(node);
-                }
+        //node.description = descriptionSplit || node.description;
+
+        if (slugSplit.length > 2) {
+            // it is a subpage
+            if (!pages[slugSplit[1]]) {
+                // first child node
+                pages[slugSplit[1]] = {
+                    name: slugSplit[1],
+                    description: descriptionSplit[0],
+                    subpage: true,
+                    pages: [{ ...node, description: descriptionSplit[1] }],
+                };
             } else {
-                pages[slugSplit[1]] = node;
+                // second child node
+                pages[slugSplit[1]].pages.push({
+                    ...node,
+                    description: descriptionSplit[1],
+                });
             }
-            return true;
-        });
+        } else {
+            // is not a subpage node
+            pages[slugSplit[1]] = node;
+        }
+        return true;
+    });
     const locationTop = location.pathname.split("/")[1];
+
+    console.log(pages);
 
     return (
         <Menu isMobileMenuOpen={isMobileMenuOpen}>
@@ -147,25 +166,28 @@ export default ({ location }) => {
                     if (!page.subpage) {
                         return (
                             <Link to={page.path} key={page.path}>
-                                {page.name}
+                                {page.description}
                             </Link>
                         );
                     }
                     if (page.subpage) {
                         return (
                             <React.Fragment key={page.name}>
-                                <Link to={page.pages[0].path}>
-                                    {sentenceCase(page.name)}
-                                </Link>
+                                <TopLink to={page.pages[0].path}>
+                                    {page.description}
+                                </TopLink>
                                 {locationTop === page.name &&
-                                    page.pages.map((subpage) => (
-                                        <Sublink
-                                            to={subpage.path}
-                                            key={subpage.path}
-                                        >
-                                            {subpage.name}
-                                        </Sublink>
-                                    ))}
+                                    page.pages.map(
+                                        (subpage) =>
+                                            subpage.description !== "Intro" && (
+                                                <Sublink
+                                                    to={subpage.path}
+                                                    key={subpage.path}
+                                                >
+                                                    {subpage.description}
+                                                </Sublink>
+                                            )
+                                    )}
                             </React.Fragment>
                         );
                     } else {
