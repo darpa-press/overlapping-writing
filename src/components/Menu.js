@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql, Link } from "gatsby";
 
+const MobileWritingLink = styled(Link)`
+    display: none;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+`;
+
 const Menu = styled.div`
     display: flex;
     flex-direction: column;
@@ -27,6 +34,10 @@ const Menu = styled.div`
         padding: 0.75rem 1rem;
         max-width: none;
         overflow: auto;
+    }
+
+    ${MobileWritingLink} {
+        display: ${(props) => (props.isMobileMenuOpen ? "block" : "none")};
     }
 `;
 
@@ -85,6 +96,16 @@ const MenuHeader = styled.div`
     }
 `;
 
+const WritingLinkDesktop = styled(Link)`
+    display: none;
+    @media (min-width: 761px) {
+        display: block;
+        position: fixed;
+        bottom: 1rem;
+        left: 1rem;
+    }
+`;
+
 export default ({ location }) => {
     const {
         allGoogleDocs: { edges },
@@ -111,7 +132,6 @@ export default ({ location }) => {
             node.description && typeof node.description == "string"
                 ? node.description.split("/")
                 : false;
-        console.log("this", node.description, descriptionSplit);
 
         //node.description = descriptionSplit || node.description;
 
@@ -140,8 +160,6 @@ export default ({ location }) => {
     });
     const locationTop = location.pathname.split("/")[1];
 
-    console.log(pages);
-
     return (
         <Menu isMobileMenuOpen={isMobileMenuOpen}>
             <MenuHeader>
@@ -156,6 +174,12 @@ export default ({ location }) => {
                 >
                     Overlapping
                 </MobileActivate>
+                <MobileWritingLink
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    to="/about"
+                >
+                    Writing
+                </MobileWritingLink>
             </MenuHeader>
             <MenuItems isMobileMenuOpen={isMobileMenuOpen}>
                 {Object.keys(pages).map((id) => {
@@ -195,6 +219,7 @@ export default ({ location }) => {
                     }
                 })}
             </MenuItems>
+            <WritingLinkDesktop to="/about">Writing</WritingLinkDesktop>
         </Menu>
     );
 };

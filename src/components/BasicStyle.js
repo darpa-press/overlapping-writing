@@ -5,23 +5,23 @@ const BasicStyle = createGlobalStyle`
     html, body {
         padding: 0;
         margin:0;
-        background: #fcfcfc;
+        background: #f8f9fa;
     }
 
     * { 
         box-sizing: border-box;
     }
     html {
-        font-size: 200%;
+        font-size: 150%;
         line-height: 1.2;
         font-family: "folio";
 
         @media (max-width:768px) {
-            font-size: 120%;
+            font-size: 100%;
         }
 
         @media (min-width: 769px) and (max-width:1280px) {
-            font-size: 150%;
+            font-size: 125%;
         }
     }
 
@@ -39,7 +39,7 @@ const BasicStyle = createGlobalStyle`
     p {
         margin: 0;
     }
-    
+    25
     h1 {
         font-weight: 500;
         margin: 0 0 6rem 0;

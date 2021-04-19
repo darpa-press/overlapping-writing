@@ -29,28 +29,17 @@ const HeadLinks = styled.div`
 
 const Content = styled.div`
     flex: 1;
-    padding: 1rem;
+    padding: 0;
     height: 100%;
-    overflow: auto;
-`;
-
-const PageContent = styled.div`
-    max-width: 40rem;
-    padding-bottom: 30vh;
-`;
-
-const PageHead = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 3.8rem;
+    overflow: hidden;
+    position: relative;
 `;
 
 const IframeSourceContainer = styled.div`
     position: relative;
+    height: 100%;
     width: 100%;
-    height: 80vh;
-    border: 1px solid #dedede;
+    background: transparent;
     border-bottom-width: 2px;
     iframe {
         position: absolute;
@@ -69,16 +58,15 @@ export default ({
     },
     location,
 }) => {
-    const { search, pathname } = location || { search: false, pathname: "/" };
-    const searchParsed = queryString.parse(search);
-
     const pageTitleA = "Overlapping writing";
     const pageTitleB = title;
     let pageTitle = "";
     for (let i = 0; i <= pageTitleA.length; i += 2) {
         pageTitle += pageTitleA.substr(i, 2) + pageTitleB.substr(i / 2, 1);
     }
-
+    console.log(
+        `https://docs.google.com/document/d/e/${documentId}/pub?embedded=true`
+    );
     return (
         <>
             <BasicStyle />
@@ -89,50 +77,24 @@ export default ({
             <Page>
                 <Menu location={location} />
                 <Content>
-                    <PageHead>
-                        <HeadLinks>
-                            <Link
-                                className={
-                                    searchParsed.source !== "1"
-                                        ? "active"
-                                        : "inactive"
-                                }
-                                to={pathname}
-                            >
-                                Article
-                            </Link>{" "}
-                            <Link
-                                className={
-                                    searchParsed.source === "1"
-                                        ? "active"
-                                        : "inactive"
-                                }
-                                to={`${pathname}?source=1`}
-                            >
-                                Source
-                            </Link>
-                        </HeadLinks>
-                        <div>
-                            <Link to={"/about"}>Writing</Link>
-                        </div>
-                    </PageHead>
-                    {searchParsed.source === "1" ? (
-                        <IframeSourceContainer>
-                            <iframe
-                                title="Source"
-                                frameBorder="0"
-                                src={`https://docs.google.com/document/d/${documentId}/edit`}
-                            ></iframe>
-                        </IframeSourceContainer>
-                    ) : (
-                        <PageContent
-                            dangerouslySetInnerHTML={{
-                                __html: html,
-                            }}
-                        />
-                    )}
+                    <IframeSourceContainer>
+                        <iframe
+                            title="Source"
+                            frameBorder="0"
+                            src={`https://docs.google.com/document/d/${documentId}/preview`}
+                        ></iframe>
+                    </IframeSourceContainer>
+                    {/* <IframeSourceContainerDesktop>
+                        <iframe
+                            title="Source"
+                            frameBorder="0"
+                            src={`https://docs.google.com/document/d/${documentId}/pub`}
+                        ></iframe>
+                    </IframeSourceContainerDesktop> */}
                 </Content>
             </Page>
         </>
     );
+
+    //src={`https://docs.google.com/document/d/${documentId}/edit`}
 };
