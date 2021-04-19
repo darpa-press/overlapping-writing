@@ -52,7 +52,7 @@ const MenuItems = styled.div`
         /* display: flex;
         flex-direction: column; */
         display: ${(props) => (props.isMobileMenuOpen ? "block" : "none")};
-        margin-top: 2rem;
+        margin-top: 0.5rem;
         padding-bottom: 1rem;
 
         > * {
@@ -85,6 +85,9 @@ const MobileActivate = styled.button`
     display: none;
     padding: 0;
     @media screen and (max-width: 768px) {
+        position: fixed;
+        bottom: 1rem;
+        left: 1rem;
         display: block;
     }
 `;
@@ -182,6 +185,11 @@ export default ({ location }) => {
                 </MobileWritingLink>
             </MenuHeader>
             <MenuItems isMobileMenuOpen={isMobileMenuOpen}>
+                {isMobileMenuOpen && (
+                    <Link to="/home" style={{ marginBottom: "1rem" }}>
+                        Home
+                    </Link>
+                )}
                 {Object.keys(pages).map((id) => {
                     const page = pages[id];
                     if (page.name === "Home" || page.name === "About") {
