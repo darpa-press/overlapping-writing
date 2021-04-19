@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import queryString from "query-string";
@@ -57,6 +57,7 @@ const IframeSourceContainer = styled.div`
 export default ({
     data: {
         googleDocs: {
+            description,
             name: title,
             document: { documentId },
             childMarkdownRemark: { html },
@@ -64,15 +65,20 @@ export default ({
     },
     location,
 }) => {
-    const pageTitleA = "Overlapping writing";
-    const pageTitleB = title;
-    let pageTitle = "";
-    for (let i = 0; i <= pageTitleA.length; i += 2) {
-        pageTitle += pageTitleA.substr(i, 2) + pageTitleB.substr(i / 2, 1);
-    }
-    console.log(
-        `https://docs.google.com/document/d/e/${documentId}/pub?embedded=true`
-    );
+    const [pageTitle, setPageTitle] = useState("");
+    useEffect(() => {
+        const pageTitleA = "Overlapping writing";
+        const pageTitleB = description
+            ? description.split("/").slice(-1)[0]
+            : title.replace(/[0-9 ]/g, "");
+        let interimPageTitle = "";
+        for (let i = 0; i <= pageTitleA.length; i += 1) {
+            interimPageTitle +=
+                pageTitleA.substr(i, 2) + pageTitleB.substr(i / 2, 1);
+        }
+        setPageTitle(interimPageTitle);
+    }, [description]);
+
     return (
         <>
             <BasicStyle />
@@ -90,17 +96,8 @@ export default ({
                             src={`https://docs.google.com/document/d/${documentId}/preview`}
                         ></iframe>
                     </IframeSourceContainer>
-                    {/* <IframeSourceContainerDesktop>
-                        <iframe
-                            title="Source"
-                            frameBorder="0"
-                            src={`https://docs.google.com/document/d/${documentId}/pub`}
-                        ></iframe>
-                    </IframeSourceContainerDesktop> */}
                 </Content>
             </Page>
         </>
     );
-
-    //src={`https://docs.google.com/document/d/${documentId}/edit`}
 };
