@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
-import queryString from "query-string";
-import { Link } from "gatsby";
 import Menu from "./Menu";
 
 import BasicStyle from "./BasicStyle";
@@ -17,13 +15,6 @@ const Page = styled.div`
 
     @media (max-width: 768px) {
         flex-direction: column;
-    }
-`;
-
-const HeadLinks = styled.div`
-    display: flex;
-    > * {
-        margin-right: 0.5rem;
     }
 `;
 
@@ -77,7 +68,7 @@ export default ({
                 pageTitleA.substr(i, 2) + pageTitleB.substr(i / 2, 1);
         }
         setPageTitle(interimPageTitle);
-    }, [description]);
+    }, [description, title]);
 
     return (
         <>

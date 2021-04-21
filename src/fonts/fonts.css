@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
     font-family: "folio";
     src: url("foliobt-medium-webfont.woff2") format("woff2"),
         url("foliobt-medium-webfont.woff") format("woff");
@@ -37,3 +37,7 @@
     font-weight: normal;
     font-style: italic;
 }
+
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");

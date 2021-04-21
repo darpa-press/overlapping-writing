@@ -14,7 +14,7 @@ const BasicStyle = createGlobalStyle`
     html {
         font-size: 150%;
         line-height: 1.2;
-        font-family: "folio";
+        font-family: 'Inter', sans-serif;
 
         @media (max-width:768px) {
             font-size: 120%;
