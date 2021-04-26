@@ -34,6 +34,7 @@ const Menu = styled.div`
         padding: 0.75rem 1rem;
         max-width: none;
         overflow: auto;
+        min-height: 3rem;
     }
 
     ${MobileWritingLink} {
@@ -101,7 +102,7 @@ const MenuHeader = styled.div`
 
 const WritingLinkDesktop = styled(Link)`
     display: none;
-    @media (min-width: 761px) {
+    @media (min-width: 769px) {
         display: block;
         position: fixed;
         bottom: 1rem;
