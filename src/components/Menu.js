@@ -72,6 +72,15 @@ const TopLink = styled(Link)`
     margin-bottom: 0.333rem;
 `;
 
+const RegLink = styled(Link)`
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    padding: 0.15rem 0;
+    &.regLink + .regLink {
+        margin-top: 0;
+    }
+`;
+
 const Sublink = styled(Link)`
     margin-left: 1rem;
     margin-bottom: 0.333rem;
@@ -198,9 +207,13 @@ export default ({ location }) => {
                     }
                     if (!page.subpage) {
                         return (
-                            <Link to={page.path} key={page.path}>
+                            <RegLink
+                                className="regLink"
+                                to={page.path}
+                                key={page.path}
+                            >
                                 {page.description}
-                            </Link>
+                            </RegLink>
                         );
                     }
                     if (page.subpage) {
