@@ -12,12 +12,14 @@ import sam from "../sounds/sam.mp3";
 import robert from "../sounds/robert.mp3";
 import isadora from "../sounds/isadora.mp3";
 import sidney from "../sounds/sidney.mp3";
+import singing from "../sounds/singing.mp3";
 
 const sounds = {
     "/1-foyer/00-foyer": foyer,
     "/2-mimosas-room/00-mimosa": mimosa,
     "/3-sams-room/00-sam": sam,
     "/4-roberts-room/00-robert": robert,
+    "/4-roberts-room/02-the-singing-alphabet": singing,
     "/5-sidney-and-isadoras-room/00-sidney-and-isadora": isadora,
     "/6-after-hours/00-after-hours": sidney,
 };
