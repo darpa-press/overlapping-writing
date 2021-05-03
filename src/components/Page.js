@@ -63,26 +63,23 @@ const IframeSourceContainer = styled.div`
 `;
 
 const SoundConsent = styled.div`
-    position: fixed;
-    bottom: 0rem;
-    left: 0rem;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+    padding: 1rem;
     align-items: center;
-    justify-content: flex-start;
-    background: white;
-    padding: 0.75rem;
-    font-size: 0.7rem;
-    line-height: 1.1;
-    > div:first-child {
-        margin-right: 1rem;
-    }
-    user-select: none;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    line-height: 1.4;
+    height: 20vh;
+    width: 20vh;
+    border-radius: 50%;
+    border: 2px solid red;
+    margin-left: ${(props) => props.m}vw;
+    margin-top: ${(props) => props.h}vh;
 `;
 
 const SoundButton = styled.a`
-    font-size: 0.7rem;
     line-height: 1.1;
     margin: 0 0.5rem 0 0;
     cursor: pointer;
@@ -105,6 +102,12 @@ export default ({
     const [pageTitle, setPageTitle] = useState("");
     const audioRef = useRef();
     const [acceptsSound, setAcceptsSound] = useCookie("okWithSound", "0");
+    const [hasAcceptedSound, setHasAcceptedSound] = useState(false);
+
+    var d = new Date();
+    var hPercent = ((d.getHours() + 1) / 24) * 50;
+    var mPercent = ((d.getMinutes() + 1) / 60) * 50;
+    console.log(hPercent, mPercent);
 
     useEffect(() => {
         const pageTitleA = "Overlapping writing";
@@ -138,28 +141,46 @@ export default ({
             <Page>
                 <Menu location={location} />
                 <Content>
-                    <IframeSourceContainer>
-                        <iframe
-                            title="Source"
-                            frameBorder="0"
-                            src={`https://docs.google.com/document/d/${documentId}/preview`}
-                        ></iframe>
-                    </IframeSourceContainer>
+                    {location.pathname === "/home" ? (
+                        <div>
+                            {hasAcceptedSound === false && (
+                                <SoundConsent h={hPercent} m={mPercent}>
+                                    <div>
+                                        This publication also sings. Would you
+                                        like to hear it?
+                                    </div>
+                                    <div>
+                                        <SoundButton
+                                            onClick={() => {
+                                                setAcceptsSound("1");
+                                                setHasAcceptedSound(true);
+                                            }}
+                                        >
+                                            Yes
+                                        </SoundButton>
+                                        <SoundButton
+                                            onClick={() => {
+                                                setAcceptsSound("2");
+                                                setHasAcceptedSound(true);
+                                            }}
+                                        >
+                                            No
+                                        </SoundButton>
+                                    </div>
+                                </SoundConsent>
+                            )}
+                        </div>
+                    ) : (
+                        <IframeSourceContainer>
+                            <iframe
+                                title="Source"
+                                frameBorder="0"
+                                src={`https://docs.google.com/document/d/${documentId}/preview`}
+                            ></iframe>
+                        </IframeSourceContainer>
+                    )}
                 </Content>
             </Page>
-            {acceptsSound === "0" && (
-                <SoundConsent>
-                    <div>
-                        This publication also sings. Would you like to hear it?
-                    </div>
-                    <SoundButton onClick={() => setAcceptsSound("1")}>
-                        Yes
-                    </SoundButton>
-                    <SoundButton onClick={() => setAcceptsSound("2")}>
-                        No
-                    </SoundButton>
-                </SoundConsent>
-            )}
         </>
     );
 };
