@@ -61,6 +61,17 @@ const IframeSourceContainer = styled.div`
             transform: scale(0.5);
             transform-origin: top left;
         }
+
+        @media screen and (min-width: 1280px) and (max-width: 1559px) {
+            position: fixed;
+            left: 20%;
+            width: 80%;
+        }
+
+        @media screen and (min-width: 1560px) {
+            position: fixed;
+            left: 0;
+        }
     }
 `;
 
