@@ -143,6 +143,20 @@ export default ({
         }
     }, [acceptsSound, location.pathname]);
 
+    useEffect(() => {
+        document.addEventListener("visibilitychange", function () {
+            if (document.hidden) {
+                if (audioRef.current) {
+                    audioRef.current.pause();
+                }
+            } else {
+                if (audioRef.current) {
+                    audioRef.current.play();
+                }
+            }
+        });
+    }, [audioRef]);
+
     return (
         <>
             <audio ref={audioRef} />
