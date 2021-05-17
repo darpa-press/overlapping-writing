@@ -154,6 +154,7 @@ export default ({
     location,
 }) => {
     const [pageTitle, setPageTitle] = useState("");
+    const [menuPosition, setMenuPosition] = useCookie("menuPos", 0);
     const audioRef = useRef();
     const [acceptsSound, setAcceptsSound] = useCookie("okWithSound", "0");
     const [hasAcceptedSound, setHasAcceptedSound] = useState(false);
@@ -161,7 +162,6 @@ export default ({
     var d = new Date();
     var hPercent = ((d.getHours() + 1) / 24) * 50;
     var mPercent = ((d.getMinutes() + 1) / 60) * 50;
-    console.log(hPercent, mPercent);
 
     useEffect(() => {
         const pageTitleA = "Overlapping writing";
@@ -207,12 +207,16 @@ export default ({
                 <title>{pageTitle}</title>
             </Helmet>
             <Page>
-                <Menu location={location} />
+                <Menu
+                    location={location}
+                    menuPosition={menuPosition}
+                    setMenuPosition={setMenuPosition}
+                />
                 <Content>
                     {location.pathname === "/home" ? (
                         <div>
                             <TitleDiamond
-                                href="/about"
+                                href="/7/about"
                                 h={hPercent}
                                 m={mPercent}
                             >

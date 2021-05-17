@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import snarkdown from "snarkdown";
@@ -58,7 +58,7 @@ const MenuLink = styled(Link)`
 `;
 
 const TopLink = styled(Link)`
-    margin-bottom: 0.333rem;
+    margin-bottom: 0.75rem;
 `;
 
 const RegLink = styled(Link)`
@@ -73,12 +73,15 @@ const RegLink = styled(Link)`
 const LinkContainer = styled.div`
     display: flex;
     flex-direction: column;
-    padding-bottom: 1rem;
+    //padding-bottom: 1rem;
 `;
 
 const Sublink = styled(Link)`
     margin-left: 1rem;
-    margin-bottom: 0.333rem;
+    margin-bottom: 0.75rem;
+    :last-child {
+        margin-bottom: 1.5rem;
+    }
 `;
 
 const MobileActivate = styled.button`
@@ -104,7 +107,13 @@ const MenuHeader = styled.div`
     }
 `;
 
-export default ({ location }) => {
+export default ({ location, menuPosition, setMenuPosition }) => {
+    const menuRef = useRef();
+    //const locationTop = location.pathname.split("/")[1];
+    useLayoutEffect(() => {
+        menuRef.current.scrollTop = menuPosition;
+    }, []);
+
     const {
         allGoogleDocs: { edges },
     } = useStaticQuery(graphql`
@@ -156,10 +165,16 @@ export default ({ location }) => {
         }
         return true;
     });
-    const locationTop = location.pathname.split("/")[1];
 
     return (
-        <Menu isMobileMenuOpen={isMobileMenuOpen}>
+        <Menu
+            ref={menuRef}
+            isMobileMenuOpen={isMobileMenuOpen}
+            onScroll={(e) => {
+                console.log("scroll");
+                setMenuPosition(e.target.scrollTop);
+            }}
+        >
             <MenuHeader>
                 <MenuLink
                     to="/"
@@ -203,6 +218,7 @@ export default ({ location }) => {
                             />
                         );
                     }
+
                     if (page.subpage) {
                         return (
                             <LinkContainer key={page.name}>
