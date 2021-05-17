@@ -86,14 +86,26 @@ const SoundConsent = styled.div`
     gap: 0.5rem;
     text-align: center;
     line-height: 1.4;
-    height: 20vh;
-    width: 20vh;
-    min-width: 12vw;
-    min-height: 12vw;
+    height: 40vh;
+    width: 40vh;
+    max-width: 400px;
+    max-height: 400px;
     border-radius: 50%;
     border: 2px solid red;
     margin-left: ${(props) => props.m}vw;
     margin-top: ${(props) => props.h}vh;
+
+    @media screen and (max-width: 768px) {
+        margin-left: 5vh;
+        margin-top: 45vh;
+        width: 45vh;
+        height: 45vh;
+    }
+
+    @media screen and (min-width: 769px) and (max-width: 1280px) {
+        height: 40vh;
+        width: 40vh;
+    }
 `;
 
 const SoundButton = styled.a`
@@ -106,8 +118,10 @@ const SoundButton = styled.a`
 `;
 
 const TitleDiamond = styled(Link)`
-    height: 12vw;
-    width: 12vw;
+    height: 25vw;
+    width: 25vw;
+    max-width: 360px;
+    max-height: 360px;
     position: absolute;
     display: flex;
     align-items: center;
@@ -116,6 +130,14 @@ const TitleDiamond = styled(Link)`
     //left: 40%;
     text-align: center;
     color: green;
+
+    @media screen and (max-width: 768px) {
+        position: fixed;
+        top: 10vh;
+        left: 10vh;
+        width: 35vh;
+        height: 35vh;
+    }
 
     right: ${(props) => props.m}vw;
     bottom: ${(props) => props.h}vh;
