@@ -96,12 +96,14 @@ const SoundConsent = styled.div`
     border: 2px solid red;
     margin-left: ${(props) => props.m}vw;
     margin-top: ${(props) => props.h}vh;
+    z-index: 2;
+    position: relative;
 
     @media screen and (max-width: 768px) {
         margin-left: 5vh;
         margin-top: 45vh;
-        width: 45vh;
-        height: 45vh;
+        width: 80vw;
+        height: 80vw;
     }
 
     @media screen and (min-width: 769px) and (max-width: 1280px) {
@@ -132,13 +134,14 @@ const TitleDiamond = styled(Link)`
     //left: 40%;
     text-align: center;
     color: green;
+    z-index: 1;
 
     @media screen and (max-width: 768px) {
         position: fixed;
         top: 10vh;
-        left: 10vh;
-        width: 35vh;
-        height: 35vh;
+        left: 20vw;
+        width: 60vw;
+        height: 60vw;
     }
 
     right: ${(props) => props.m}vw;
