@@ -13,17 +13,19 @@ import mimosa from "../sounds/mimosa.mp3";
 import sam from "../sounds/sam.mp3";
 import robert from "../sounds/robert.mp3";
 import isadora from "../sounds/isadora.mp3";
-import sidney from "../sounds/sidney.mp3";
+import after from "../sounds/after-hours.mp3";
 import singing from "../sounds/singing.mp3";
+import agree from "../sounds/agree.mp3";
 
 const sounds = {
-    "/1-foyer/00-foyer": foyer,
-    "/2-mimosas-room/00-mimosa": mimosa,
-    "/3-sams-room/00-sam": sam,
-    "/4-roberts-room/00-robert": robert,
-    "/4-roberts-room/02-the-singing-alphabet": singing,
-    "/5-sidney-and-isadoras-room/00-sidney-and-isadora": isadora,
-    "/6-after-hours/00-after-hours": sidney,
+    "/1/0-foyer": foyer,
+    "/2/0-mimosa": mimosa,
+    "/3/0-sam": sam,
+    "/4/0-robert": robert,
+    "/4/2-tina": singing,
+    "/5/0-sidney-isadora": isadora,
+    "/6/00-after-hours": after,
+    agree: agree,
 };
 
 const Page = styled.div`
@@ -238,7 +240,7 @@ export default ({
                     {location.pathname === "/home" ? (
                         <div>
                             <TitleDiamond
-                                href="/7/about"
+                                to="/7/about"
                                 h={hPercent}
                                 m={mPercent}
                             >
@@ -265,6 +267,14 @@ export default ({
                                             onClick={() => {
                                                 setAcceptsSound("1");
                                                 setHasAcceptedSound(true);
+                                                audioRef.current.src =
+                                                    sounds["agree"];
+                                                console.log(sounds);
+                                                audioRef.current
+                                                    .play()
+                                                    .catch((e) =>
+                                                        console.log(e)
+                                                    );
                                             }}
                                         >
                                             Yes
