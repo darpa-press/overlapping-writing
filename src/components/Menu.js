@@ -2,13 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql, Link } from "gatsby";
 
-const MobileWritingLink = styled(Link)`
-    display: none;
-    position: fixed;
-    right: 1rem;
-    bottom: 1rem;
-`;
-
 const Menu = styled.div`
     display: flex;
     flex-direction: column;
@@ -35,10 +28,6 @@ const Menu = styled.div`
         max-width: none;
         overflow: auto;
         min-height: 3rem;
-    }
-
-    ${MobileWritingLink} {
-        display: ${(props) => (props.isMobileMenuOpen ? "block" : "none")};
     }
 `;
 
@@ -81,6 +70,12 @@ const RegLink = styled(Link)`
     }
 `;
 
+const LinkContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+`;
+
 const Sublink = styled(Link)`
     margin-left: 1rem;
     margin-bottom: 0.333rem;
@@ -106,16 +101,6 @@ const MenuHeader = styled.div`
     margin-bottom: 4rem;
     @media (max-width: 768px) {
         margin-bottom: 0;
-    }
-`;
-
-const WritingLinkDesktop = styled(Link)`
-    display: none;
-    @media (min-width: 769px) {
-        display: block;
-        position: fixed;
-        bottom: 1rem;
-        left: 1rem;
     }
 `;
 
@@ -181,18 +166,14 @@ export default ({ location }) => {
                     className={location.pathname === "/home" ? "active" : ""}
                 >
                     Overlapping
+                    <br />
+                    Writing
                 </MenuLink>
                 <MobileActivate
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
-                    Overlapping
+                    Overlapping Writing
                 </MobileActivate>
-                <MobileWritingLink
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    to="/about"
-                >
-                    Writing
-                </MobileWritingLink>
             </MenuHeader>
             <MenuItems isMobileMenuOpen={isMobileMenuOpen}>
                 {isMobileMenuOpen && (
@@ -218,30 +199,28 @@ export default ({ location }) => {
                     }
                     if (page.subpage) {
                         return (
-                            <React.Fragment key={page.name}>
+                            <LinkContainer key={page.name}>
                                 <TopLink to={page.pages[0].path}>
                                     {page.description}
                                 </TopLink>
-                                {locationTop === page.name &&
-                                    page.pages.map(
-                                        (subpage) =>
-                                            subpage.description !== "Intro" && (
-                                                <Sublink
-                                                    to={subpage.path}
-                                                    key={subpage.path}
-                                                >
-                                                    {subpage.description}
-                                                </Sublink>
-                                            )
-                                    )}
-                            </React.Fragment>
+                                {page.pages.map(
+                                    (subpage) =>
+                                        subpage.description !== "Intro" && (
+                                            <Sublink
+                                                to={subpage.path}
+                                                key={subpage.path}
+                                            >
+                                                {subpage.description}
+                                            </Sublink>
+                                        )
+                                )}
+                            </LinkContainer>
                         );
                     } else {
                         return false;
                     }
                 })}
             </MenuItems>
-            <WritingLinkDesktop to="/about">Writing</WritingLinkDesktop>
         </Menu>
     );
 };

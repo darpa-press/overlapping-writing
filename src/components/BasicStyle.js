@@ -14,7 +14,7 @@ const BasicStyle = createGlobalStyle`
     html {
         font-size: 150%;
         line-height: 1.2;
-        font-family: 'Inter', sans-serif;
+        font-family: 'CenturyS', serif;
 
         @media (max-width:768px) {
             font-size: 120%;
@@ -67,7 +67,7 @@ const BasicStyle = createGlobalStyle`
 
     a { 
         color: blue;
-        text-underline-position: under;
+        // text-underline-position: under;
         text-decoration: none;
         text-shadow: 0 0 0px rgba(0, 0, 255, 0.0);
         transition: 0.2s all ease;

@@ -4,6 +4,8 @@ import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Menu from "./Menu";
 
+import { Link } from "gatsby";
+
 import BasicStyle from "./BasicStyle";
 
 import foyer from "../sounds/foyer.mp3";
@@ -86,6 +88,8 @@ const SoundConsent = styled.div`
     line-height: 1.4;
     height: 20vh;
     width: 20vh;
+    min-width: 12vw;
+    min-height: 12vw;
     border-radius: 50%;
     border: 2px solid red;
     margin-left: ${(props) => props.m}vw;
@@ -98,6 +102,43 @@ const SoundButton = styled.a`
     cursor: pointer;
     &:hover {
         //color: red;
+    }
+`;
+
+const TitleDiamond = styled(Link)`
+    height: 12vw;
+    width: 12vw;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //top: 40%;
+    //left: 40%;
+    text-align: center;
+    color: green;
+
+    right: ${(props) => props.m}vw;
+    bottom: ${(props) => props.h}vh;
+
+    :hover {
+        text-decoration: none;
+        background: rgba(0, 255, 0, 0.1);
+    }
+
+    > div {
+        max-width: 8rem;
+    }
+
+    ::after {
+        height: 100%;
+        width: 100%;
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        border: 2px solid green;
+        transform: rotate(45deg);
     }
 `;
 
@@ -170,6 +211,23 @@ export default ({
                 <Content>
                     {location.pathname === "/home" ? (
                         <div>
+                            <TitleDiamond
+                                href="/about"
+                                h={hPercent}
+                                m={mPercent}
+                            >
+                                <div>
+                                    <em>
+                                        You
+                                        <br />
+                                        are reading
+                                    </em>
+                                    <br />
+                                    <br />
+                                    Writing in the Expanded Field, vol. 3<br />
+                                    <br />ⓘ
+                                </div>
+                            </TitleDiamond>
                             {hasAcceptedSound === false && (
                                 <SoundConsent h={hPercent} m={mPercent}>
                                     <div>
