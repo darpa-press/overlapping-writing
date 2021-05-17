@@ -53,10 +53,6 @@ const BasicStyle = createGlobalStyle`
         margin: 4rem 0 1.5rem 0;
     }
 
-    em, i {
-        font-family: verdigris;
-    }
-
     pre, code {
         font-family: inherit;
         font-style: inherit;

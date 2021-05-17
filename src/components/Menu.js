@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql, Link } from "gatsby";
+import snarkdown from "snarkdown";
 
 const Menu = styled.div`
     display: flex;
@@ -37,7 +38,6 @@ const MenuItems = styled.div`
     }
 
     padding-bottom: 4rem;
-
     @media (max-width: 768px) {
         /* display: flex;
         flex-direction: column; */
@@ -183,6 +183,9 @@ export default ({ location }) => {
                 )}
                 {Object.keys(pages).map((id) => {
                     const page = pages[id];
+                    const renderedDescription =
+                        page.description &&
+                        page.description.replace("\\n", "<br/>");
                     if (page.name === "Home" || page.name === "About") {
                         return false;
                     }
@@ -192,26 +195,41 @@ export default ({ location }) => {
                                 className="regLink"
                                 to={page.path}
                                 key={page.path}
-                            >
-                                {page.description}
-                            </RegLink>
+                                dangerouslySetInnerHTML={{
+                                    __html: snarkdown(
+                                        renderedDescription || ""
+                                    ),
+                                }}
+                            />
                         );
                     }
                     if (page.subpage) {
                         return (
                             <LinkContainer key={page.name}>
-                                <TopLink to={page.pages[0].path}>
-                                    {page.description}
-                                </TopLink>
+                                <TopLink
+                                    to={page.pages[0].path}
+                                    dangerouslySetInnerHTML={{
+                                        __html: snarkdown(
+                                            renderedDescription || ""
+                                        ),
+                                    }}
+                                />
                                 {page.pages.map(
                                     (subpage) =>
                                         subpage.description !== "Intro" && (
                                             <Sublink
                                                 to={subpage.path}
                                                 key={subpage.path}
-                                            >
-                                                {subpage.description}
-                                            </Sublink>
+                                                dangerouslySetInnerHTML={{
+                                                    __html: snarkdown(
+                                                        subpage.description &&
+                                                            subpage.description.replace(
+                                                                "\\n",
+                                                                "<br/>"
+                                                            )
+                                                    ),
+                                                }}
+                                            />
                                         )
                                 )}
                             </LinkContainer>
