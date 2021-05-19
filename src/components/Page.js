@@ -38,6 +38,7 @@ const Page = styled.div`
 
     @media (max-width: 768px) {
         flex-direction: column;
+        height: calc(100% - 3rem);
     }
 `;
 
