@@ -59,7 +59,16 @@ const IframeSourceContainer = styled.div`
         position: absolute;
         width: 100%;
         height: 100%;
-        @media screen and (max-width: 768px) {
+
+        @media screen and (max-width: 375px) {
+            width: ${(props) => (props.isAudrey ? "225%" : "200%")};
+            height: ${(props) => (props.isAudrey ? "225%" : "200%")};
+            transform: ${(props) =>
+                props.isAudrey ? "scale(0.444444444)" : "0.5"};
+            transform-origin: top left;
+        }
+
+        @media screen and (min-width: 376px) and (max-width: 768px) {
             width: 200%;
             height: 200%;
             transform: scale(0.5);
@@ -295,7 +304,9 @@ export default ({
                             )}
                         </div>
                     ) : (
-                        <IframeSourceContainer>
+                        <IframeSourceContainer
+                            isAudrey={location.pathname === "/5/2-audrey"}
+                        >
                             <iframe
                                 title="Source"
                                 frameBorder="0"
