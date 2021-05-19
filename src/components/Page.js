@@ -64,7 +64,7 @@ const IframeSourceContainer = styled.div`
             width: ${(props) => (props.isAudrey ? "225%" : "200%")};
             height: ${(props) => (props.isAudrey ? "225%" : "200%")};
             transform: ${(props) =>
-                props.isAudrey ? "scale(0.444444444)" : "0.5"};
+                props.isAudrey ? "scale(0.444444444)" : "scale(0.5)"};
             transform-origin: top left;
         }
 
